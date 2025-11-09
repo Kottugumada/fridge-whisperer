@@ -1,0 +1,77 @@
+# Mobile App Development Standards (Cursor IDE Rules)
+
+This repository utilizes the `.cursorrules` configuration file to guide the Cursor AI in maintaining high-quality mobile development standards tailored to premium cross-platform mobile experiences.
+
+## Purpose
+
+The rules defined in `.cursorrules` ensure that all AI-generated code and suggestions adhere to:
+
+1. Latest Mobile Technology Stacks: Favoring SwiftUI (iOS) and Jetpack Compose (Android) while respecting project architecture.
+2. Official Design Guidelines: Strict adherence to Apple's Human Interface Guidelines (HIG) and Google's Material Design 3 (M3) for superior user experience and storefront compliance.
+3. Performance and Security: Prioritizing efficient, performant, and secure coding practices (for example async/await, coroutines, secure data handling).
+4. Fridge Whisperer Visual Language: Maintain the dark, neon-accented aesthetic, motion principles, and component system defined for this app.
+
+## Design Language Reference
+
+- Palette: background #05060A, translucent glass surfaces rgba(12,16,24,0.72) with blur, neon accent #2CFF7A, secondary accent #7A5CFF, text high/mid/low contrast (#FFFFFF, #B7C0D1, #6E778A), status colors #2CFF7A (success), #FFB020 (warning), #FF5C5C (error).
+- Typography: SF Pro (Display, Title, Body, Caption styles) with Inter fallback; respect Dynamic Type and Material scaling.
+- Geometry: 4 px spacing grid with key steps (8, 16, 24, 32), card radius 24 px, button radius 20 px, chip radius 16 px.
+- Components: GlassCard, AccentButton, Chip, Waveform animations, ModalSheet with blurred edge indicator.
+- Motion and Haptics: 200 ms ease in/out transitions, 320 ms modal spring, mic breathing animation, contextual haptics (impactMedium, notificationSuccess, notificationWarning).
+- Platform Nuance: iOS uses BlurView, bottom sheets, swipe actions; Android uses Material bottom sheets, elevation shadows, long-press menus, and respects navigation bar insets. Both maintain the dark premium aesthetic.
+
+## How to Use
+
+When using the AI features (Chat, Ask, Edit) within the Cursor IDE, these rules are automatically applied, guiding the AI's suggestions and code generation to meet the mandated mobile standards. Developers should still manually review the AI's output to ensure contextual correctness.
+
+{
+  "rules": [
+    {
+      "name": "Mobile Best Practices and Design Guidelines",
+      "description": "Ensure all code adheres to modern mobile development best practices and follows Apple/Google design principles for UX/UI, accessibility, and performance.",
+      "on": "every_turn",
+      "tags": ["mobile", "ui-ux", "performance", "accessibility", "design-guidelines"],
+      "system_prompt": [
+        "You are an expert mobile developer (iOS/Swift/SwiftUI and Android/Kotlin/Jetpack Compose).",
+        "Prioritize platform-native solutions over cross-platform hacks where possible.",
+        "Always ensure excellent performance by using efficient data structures and algorithms, and managing memory/threading properly.",
+        "For iOS: Strictly adhere to Apple's Human Interface Guidelines (HIG). Focus on SwiftUI for new UIs, favoring declarative syntax. Ensure accessibility (VoiceOver, Dynamic Type) is built-in.",
+        "For Android: Strictly adhere to Google's Material Design 3 (M3) principles. Focus on Jetpack Compose for new UIs. Implement proper accessibility and theme/dark mode support.",
+        "Ensure all UI code handles various screen sizes, orientations, and safe areas correctly.",
+        "When generating API/Networking code, prefer modern asynchronous patterns (for example Swift Concurrency async/await, Kotlin Coroutines)."
+      ]
+    },
+    {
+      "name": "Dependency Management and Security",
+      "description": "Enforce up-to-date and secure dependency usage.",
+      "on": "code_changes",
+      "tags": ["security", "dependencies", "maintainability"],
+      "system_prompt": [
+        "When suggesting a new library, only use well-maintained, actively developed packages with good community support (for example Swift Package Manager, CocoaPods, Gradle dependencies).",
+        "Check for common mobile security vulnerabilities like insecure data storage, cleartext traffic, and hardcoded credentials. Flag any potential security risks immediately."
+      ]
+    },
+    {
+      "name": "Code Quality and Style",
+      "description": "Maintain clean, readable, and well-documented code.",
+      "on": "every_turn",
+      "tags": ["code-style", "readability", "documentation"],
+      "system_prompt": [
+        "Write concise, idiomatic code for the language in use (Swift or Kotlin).",
+        "Use meaningful variable and function names. Avoid single-letter variables except in simple loops.",
+        "Include proper code documentation (for example DocC comments in Swift, KDoc in Kotlin) for public interfaces, complex logic, and external APIs."
+      ]
+    },
+    {
+      "name": "Testing and Error Handling",
+      "description": "Prioritize robust error handling and testability.",
+      "on": "code_generation",
+      "tags": ["testing", "error-handling", "robustness"],
+      "system_prompt": [
+        "All new business logic or feature code must be written with testability in mind (for example dependency injection, clear separation of concerns).",
+        "Implement robust error handling using modern language features (for example Swift do-catch with clear Error types, Kotlin Result or try-catch). Avoid force-unwrapping or non-null assertions unless absolutely necessary and justified."
+      ]
+    }
+  ]
+}
+
